@@ -1,0 +1,13 @@
+trigger:
+- master
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: Ansible@0
+  inputs:
+    ansibleInterface: 'agentMachine'
+    playbookPathOnAgentMachine: '$(Build.SourcesDirectory)/ansible/playbook.yml'
+    inventoriesAgentMachine: 'file'
+    inventoryFileOnAgentMachine: '$(Build.SourcesDirectory)/ansible/hosts'
