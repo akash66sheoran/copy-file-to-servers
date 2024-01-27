@@ -1,0 +1,9 @@
+---
+- name: copy file to servers
+  hosts: all
+  gather_facts: no
+  tasks:
+    - name: copy file
+      ansible.builtin.template:
+        src: ../sample-file.txt
+        dest: ~/my-configuration-folder/sample-file.txt
