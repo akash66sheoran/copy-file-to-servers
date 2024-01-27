@@ -5,9 +5,16 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
+- task: AzureKeyVault@2
+  inputs:
+    azureSubscription: 'Free Trial(3e90ec82-5e98-45e3-af9a-a1f6fb1938c0)'
+    KeyVaultName: 'fdafsdfsdfd34533'
+    SecretsFilter: '*'
+    RunAsPreJob: false
 - task: Ansible@0
   inputs:
     ansibleInterface: 'agentMachine'
     playbookPathOnAgentMachine: '$(Build.SourcesDirectory)/ansible/playbook.yml'
     inventoriesAgentMachine: 'file'
     inventoryFileOnAgentMachine: '$(Build.SourcesDirectory)/ansible/hosts'
+    args: '--private-key=$(server-key)'
