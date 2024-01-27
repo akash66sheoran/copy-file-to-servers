@@ -11,10 +11,11 @@ steps:
     KeyVaultName: 'fdafsdfsdfd34533'
     SecretsFilter: '*'
     RunAsPreJob: false
+- script: echo $(server-key) > /tmp/private_key.pem
 - task: Ansible@0
   inputs:
     ansibleInterface: 'agentMachine'
     playbookPathOnAgentMachine: '$(Build.SourcesDirectory)/ansible/playbook.yml'
     inventoriesAgentMachine: 'file'
     inventoryFileOnAgentMachine: '$(Build.SourcesDirectory)/ansible/hosts'
-    args: '--private-key=$(server-key)'
+    args: '--private-key=/tmp/private_key.pem'
